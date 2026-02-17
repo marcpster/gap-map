@@ -5,9 +5,9 @@ description: Remediation teaching skill targeting weak areas from assessment. Wo
 
 # Work Through — Remediation Teaching Skill
 
-Teach weak areas identified by prior assessment. This is **remediation mode** — explaining, scaffolding, worked examples, and patience. Distinct from `/gm-check-topic` (which assesses) — this skill teaches.
+Teach weak areas identified by prior assessment. This is **remediation mode** — explaining, scaffolding, worked examples, and patience. Distinct from `/gm-revise` (which assesses) — this skill teaches.
 
-> **For assessment** use `/gm-check-topic` (guided) or `run-diagnostic.sh` → `/gm-assess-answers` (scripted).
+> **For assessment** use `/gm-revise` (guided) or `run-diagnostic.sh` → `/gm-assess-answers` (scripted).
 > Use `/gm-work-through` when you already know the gaps and want to fill them.
 
 ## Usage
@@ -26,9 +26,9 @@ The optional focus can be a free-text description or a sub-topic name from the p
 
 **Topic slugs:** See the Topic Slug → File Mapping table in the relevant `COURSE.md`.
 
-## How This Differs from /gm-check-topic
+## How This Differs from /gm-revise
 
-| | `/gm-check-topic` | `/gm-work-through` |
+| | `/gm-revise` | `/gm-work-through` |
 |-|----------------|-----------------|
 | **Purpose** | Assess understanding | Teach weak areas |
 | **Style** | Testing (noting prompted vs unprompted) | Teaching (explaining, scaffolding, worked examples) |

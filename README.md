@@ -2,18 +2,16 @@
 
 A diagnostic tool for learning. Assesses understanding across courses and produces structured strength/gap maps for further learning, lesson plans, etc. Run with [Claude Code](https://claude.ai/code), specific Claude skills.
 
-> **Tip:** When you are running the skills (after the diagnostic), as soon as you can type something short on the keyboard. If you don't Claude will auto-suggest a great answer in the prompt, which is not useful for learning!
+> **Tip:** When you are running the skills (after the diagnostic), type something short on the keyboard as soon as possible. If you don't Claude will auto-suggest a great answer in the prompt, which is not useful for learning!
 
 ## The solution
 
-Split the work architecturally:
-
 | Mode | Tool | What happens |
 |------|------|-------------|
-| **Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions and captures raw answers. |
-| **Assessment** | `/gm-assess-answers` | Claude then grades the answers and generates reports. |
-| **Guided revision** | `/gm-check-topic` | A proper chat with hints and feedback — teaching, not testing. |
-| **Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
+| **1. Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions and captures raw answers. |
+| **2. Assessment** | `/gm-assess-answers` | Claude then grades the answers and generates reports. |
+| **3a. Guided revision** | `/gm-revise` | A proper chat with hints and feedback — teaching, not testing. |
+| **3b. Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
 
 The three-mode loop — **diagnose → assess → teach** — is the core of the system. Each mode feeds the next.
 
@@ -116,7 +114,7 @@ Each topic file has four sections:
 | **Key Concepts** | The actual content — what the student should know, broken into numbered sub-topics |
 | **Common Misconceptions** | What students typically get wrong (this is where the real assessment value is) |
 | **Diagnostic Script** | Open-ended questions with "Looking for" criteria — the answer key for `/gm-assess-answers` |
-| **Guided Mode probes** | Conversational starters for `/gm-check-topic` revision sessions |
+| **Guided Mode probes** | Conversational starters for `/gm-revise` revision sessions |
 
 See `courses/how-bridges-work/` for a complete working example.
 

@@ -1,9 +1,9 @@
 ---
-name: gm-check-topic
-description: Run a guided revision conversation to assess a student's understanding of a specific topic. Infers course from topic slug. Conversational style with hints and nudges allowed. Usage: /gm-check-topic [topic] [student-name]. Example: /gm-check-topic forces Jamie
+name: gm-revise
+description: Run a guided revision conversation to assess a student's understanding of a specific topic. Infers course from topic slug. Conversational style with hints and nudges allowed. Usage: /gm-revise [topic] [student-name]. Example: /gm-revise forces Jamie
 ---
 
-# Check Topic — Guided Revision Conversation
+# Revise — Guided Revision Conversation
 
 Run a conversational revision session to assess a student's understanding of a specific topic area. This is the **guided mode** — hints, nudges, and light teaching are encouraged.
 
@@ -14,12 +14,12 @@ Run a conversational revision session to assess a student's understanding of a s
 ## Usage
 
 ```
-/gm-check-topic [topic] [student-name]
+/gm-revise [topic] [student-name]
 ```
 
 **Examples:**
-- `/gm-check-topic forces Jamie`
-- `/gm-check-topic christianity-beliefs Freya`
+- `/gm-revise forces Jamie`
+- `/gm-revise christianity-beliefs Freya`
 
 **Topic slugs:** See the Topic Slug → File Mapping table in the relevant `COURSE.md`.
 
