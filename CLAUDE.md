@@ -40,6 +40,7 @@ students/
         [topic]-[date]-parent.md    # Parent-friendly update
 
 .claude/skills/
+  gm-diagnostic/SKILL.md      # Launch diagnostic session (outputs terminal command)
   gm-assess-answers/SKILL.md  # Post-diagnostic assessment skill
   gm-check-topic/SKILL.md     # Guided revision conversation skill
   gm-show-progress/SKILL.md   # Read-only progress display skill
@@ -106,7 +107,7 @@ When a student has no progress file, create one with all topics set to `not_star
 
 | Command | Usage | Purpose |
 |---------|-------|---------|
-| `run-diagnostic.sh` | `cd courses/[course-slug] && ./run-diagnostic.sh [topic] [student]` | Shell script: present scripted questions, capture answers. No AI. |
+| `/gm-diagnostic` | `/gm-diagnostic [topic] [student]` | Discover courses/topics, output the terminal command to run a diagnostic. |
 | `/gm-assess-answers` | `/gm-assess-answers [student] [topic] [date]` | Grade raw diagnostic answers against curriculum. Generates three-audience reports. |
 | `/gm-check-topic` | `/gm-check-topic [topic] [student]` | Guided revision conversation. Hints and nudges allowed. |
 | `/gm-work-through` | `/gm-work-through [topic] [student] ["optional focus"]` | Remediation teaching targeting weak areas. Produces cheat sheet. |
