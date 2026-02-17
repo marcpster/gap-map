@@ -21,7 +21,7 @@ Help the user pick a course and topic, then give them the exact command to run t
 
 ### Step 1: Discover Courses and Topics
 
-Glob `courses/*/run-diagnostic.sh` to find all courses with a diagnostic script.
+Glob `courses/*/COURSE.md` to find all courses.
 
 For each course found:
 1. Read `courses/[course-slug]/COURSE.md` — extract the **Topic Slug -> File Mapping** table to list available topics
@@ -60,7 +60,7 @@ Then ask the user which topic and student name they want.
 Copy the command to the clipboard using `pbcopy`, then tell the user it's ready to paste:
 
 ```bash
-echo "cd courses/[course-slug] && ./run-diagnostic.sh [topic-slug] [student-name]" | pbcopy
+echo "./run-diagnostic.sh [topic-slug] [student-name]" | pbcopy
 ```
 
 Then display:

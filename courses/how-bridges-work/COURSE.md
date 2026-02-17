@@ -10,7 +10,7 @@ Two topics covering the fundamentals of bridge engineering: how forces travel th
 
 | Mode | Tool | Behaviour |
 |------|------|-----------|
-| **diagnostic** | `run-diagnostic.sh` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses afterwards. |
+| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses afterwards. |
 | **guided** | `/gm-check-topic` | Conversational revision-style chat. Hints and nudges allowed. |
 | **remediation** | `/gm-work-through` | Teaching mode targeting weak areas. Worked examples, scaffolding, cheat sheets. |
 

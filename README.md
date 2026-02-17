@@ -47,7 +47,6 @@ cd gap-map
 ### Run a diagnostic
 
 ```bash
-cd courses/how-bridges-work
 ./run-diagnostic.sh forces-and-loads Freya
 ```
 
@@ -57,7 +56,6 @@ The script presents questions one at a time, captures answers, then launches Cla
 
 ```bash
 # 1. Run the diagnostic (shell script — no AI)
-cd courses/how-bridges-work
 SKIP_ASSESS=true ./run-diagnostic.sh forces-and-loads Freya
 
 # 2. Assess the answers (Claude)
@@ -78,10 +76,11 @@ The `students/example/` directory contains a worked example showing the full dat
 ## Project structure
 
 ```
+run-diagnostic.sh              # Diagnostic shell script — no AI touches this
+
 courses/
   how-bridges-work/            # Demo course (2 topics, 4 questions each)
     COURSE.md                  # Course reference (topic map, rubric, progress format)
-    run-diagnostic.sh          # Shell script — no AI touches this
     curriculum/
       overview.md              # Topic map
       topics/
@@ -103,8 +102,6 @@ students/
 1. Copy `courses/how-bridges-work/` to `courses/your-course-slug/`
 2. Edit `COURSE.md` with your subject details, topic list, and exam structure
 3. Write curriculum topic files following the pattern in the existing topics
-4. Update `run-diagnostic.sh` with your topic slugs and file mappings
-5. Run `chmod +x courses/your-course-slug/run-diagnostic.sh`
 
 Each topic file needs:
 - **Key Concepts** — what the spec covers

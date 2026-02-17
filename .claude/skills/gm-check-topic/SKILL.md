@@ -8,7 +8,7 @@ description: Run a guided revision conversation to assess a student's understand
 Run a conversational revision session to assess a student's understanding of a specific topic area. This is the **guided mode** — hints, nudges, and light teaching are encouraged.
 
 > **For scripted diagnostics** (no hints, no feedback), use the shell script instead:
-> `cd courses/[course-slug] && ./run-diagnostic.sh [topic] [student-name]`
+> `./run-diagnostic.sh [topic] [student-name]`
 > Then assess with `/gm-assess-answers [student] [topic] [date]`
 
 ## Usage

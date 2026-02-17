@@ -1,66 +1,89 @@
 #!/bin/bash
 #
-# Course Diagnostics — Question Runner (How Bridges Work)
+# Gap Map — Diagnostic Question Runner
 # Presents scripted questions from a topic file and captures student answers.
 # No AI involved — just a clean question-and-answer capture.
 #
 # Usage: ./run-diagnostic.sh [topic-slug] [student-name]
 # Example: ./run-diagnostic.sh forces-and-loads Freya
 #
-# Output: students/[student]/how-bridges-work/responses/[topic]-[date].yaml
+# Discovers the course automatically from the topic slug.
 
 set -e
 
 # --- Resolve paths relative to script location ---
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROTO_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-
-# --- Config ---
-COURSE_SLUG="how-bridges-work"
-COURSE_NAME="How Bridges Work"
 
 TOPIC_SLUG="${1}"
 STUDENT_NAME="${2}"
 DATE=$(date +%Y-%m-%d)
-CURRICULUM_DIR="${SCRIPT_DIR}/curriculum/topics"
 
-# --- Validation ---
+# --- Usage / list topics ---
 if [ -z "$TOPIC_SLUG" ] || [ -z "$STUDENT_NAME" ]; then
     echo ""
-    echo "  Course Diagnostics — Question Runner"
+    echo "  Gap Map — Diagnostic Question Runner"
     echo "  ─────────────────────────────────────"
     echo ""
-    echo "  Usage: ./run-diagnostic.sh [topic] [student-name]"
+    echo "  Usage: ./run-diagnostic.sh [topic-slug] [student-name]"
     echo ""
-    echo "  Topics:"
-    echo "    forces-and-loads    1. Forces and Loads"
-    echo "    bridge-types        2. Bridge Types"
-    echo ""
+
+    # Discover all topics across all courses
+    for COURSE_DIR in "$SCRIPT_DIR"/courses/*/; do
+        [ -d "$COURSE_DIR/curriculum/topics" ] || continue
+        SLUG=$(basename "$COURSE_DIR")
+        # Extract course name from first heading in COURSE.md
+        NAME=$(head -1 "$COURSE_DIR/COURSE.md" 2>/dev/null | sed 's/^# //' | sed 's/ — .*//')
+        echo "  ${NAME:-$SLUG}:"
+        for TOPIC_PATH in "$COURSE_DIR"/curriculum/topics/*.md; do
+            [ -f "$TOPIC_PATH" ] || continue
+            FNAME=$(basename "$TOPIC_PATH" .md)
+            # Strip leading number and dash (e.g. "1-forces-and-loads" → "forces-and-loads")
+            T_SLUG=$(echo "$FNAME" | sed 's/^[0-9]*-//')
+            # Extract topic name from first heading
+            T_NAME=$(head -1 "$TOPIC_PATH" 2>/dev/null | sed 's/^# //')
+            printf "    %-25s %s\n" "$T_SLUG" "$T_NAME"
+        done
+        echo ""
+    done
+
     echo "  Example: ./run-diagnostic.sh forces-and-loads Freya"
     echo ""
     exit 1
 fi
 
-# Lowercase student name for folder lookup
-STUDENT_LOWER=$(echo "$STUDENT_NAME" | tr '[:upper:]' '[:lower:]')
+# --- Discover course from topic slug ---
+CURRICULUM_PATH=""
+COURSE_DIR=""
+for CANDIDATE in "$SCRIPT_DIR"/courses/*/curriculum/topics/*-"${TOPIC_SLUG}".md; do
+    if [ -f "$CANDIDATE" ]; then
+        if [ -n "$CURRICULUM_PATH" ]; then
+            echo "Error: Topic '$TOPIC_SLUG' found in multiple courses. This shouldn't happen."
+            exit 1
+        fi
+        CURRICULUM_PATH="$CANDIDATE"
+        # Extract course directory (go up from topics/ → curriculum/ → course/)
+        COURSE_DIR="$(cd "$(dirname "$CANDIDATE")/../.." && pwd)"
+    fi
+done
 
-# Map slug to file
-case "$TOPIC_SLUG" in
-    forces-and-loads) TOPIC_FILE="1-forces-and-loads.md"; TOPIC_NAME="Forces and Loads" ;;
-    bridge-types) TOPIC_FILE="2-bridge-types.md"; TOPIC_NAME="Bridge Types" ;;
-    *)
-        echo "Error: Unknown topic '$TOPIC_SLUG'"
-        echo "Valid topics: forces-and-loads, bridge-types"
-        exit 1
-        ;;
-esac
-
-CURRICULUM_PATH="${CURRICULUM_DIR}/${TOPIC_FILE}"
-
-if [ ! -f "$CURRICULUM_PATH" ]; then
-    echo "Error: Curriculum file not found: $CURRICULUM_PATH"
+if [ -z "$CURRICULUM_PATH" ]; then
+    echo "Error: No topic matching '$TOPIC_SLUG' found in any course."
+    echo "Run ./run-diagnostic.sh without arguments to see available topics."
     exit 1
 fi
+
+COURSE_SLUG=$(basename "$COURSE_DIR")
+
+# Extract course name from first heading in COURSE.md
+COURSE_NAME=$(head -1 "$COURSE_DIR/COURSE.md" 2>/dev/null | sed 's/^# //' | sed 's/ — .*//')
+COURSE_NAME="${COURSE_NAME:-$COURSE_SLUG}"
+
+# Extract topic name from first heading in curriculum file
+TOPIC_NAME=$(head -1 "$CURRICULUM_PATH" 2>/dev/null | sed 's/^# //')
+TOPIC_NAME="${TOPIC_NAME:-$TOPIC_SLUG}"
+
+# Lowercase student name for folder lookup
+STUDENT_LOWER=$(echo "$STUDENT_NAME" | tr '[:upper:]' '[:lower:]')
 
 # Extract questions from curriculum file
 QUESTIONS=()
@@ -74,7 +97,7 @@ if [ ${#QUESTIONS[@]} -eq 0 ]; then
 fi
 
 # Create student responses directory if it doesn't exist
-RESPONSE_DIR="${PROTO_DIR}/students/${STUDENT_LOWER}/${COURSE_SLUG}/responses"
+RESPONSE_DIR="${SCRIPT_DIR}/students/${STUDENT_LOWER}/${COURSE_SLUG}/responses"
 mkdir -p "$RESPONSE_DIR"
 
 OUTPUT_FILE="${RESPONSE_DIR}/${TOPIC_SLUG}-${DATE}.yaml"
@@ -83,7 +106,7 @@ OUTPUT_FILE="${RESPONSE_DIR}/${TOPIC_SLUG}-${DATE}.yaml"
 clear
 echo ""
 echo "  ┌─────────────────────────────────────────┐"
-echo "  │  Course Diagnostics — ${COURSE_NAME}"
+echo "  │  ${COURSE_NAME}"
 echo "  │  Topic: ${TOPIC_NAME}"
 printf "  │  Student: %s\n" "$STUDENT_NAME"
 echo "  │  Date: ${DATE}"
@@ -182,5 +205,5 @@ else
     echo "  Launching Claude to assess answers..."
     echo ""
     CLAUDE_CMD="${CLAUDE_CMD:-$(command -v claude 2>/dev/null || echo "$HOME/.claude/local/claude")}"
-    cd "$PROTO_DIR" && "$CLAUDE_CMD" "/gm-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
+    cd "$SCRIPT_DIR" && "$CLAUDE_CMD" "/gm-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
 fi

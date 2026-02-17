@@ -10,7 +10,7 @@ Three modes:
 
 | Mode | Tool | Behaviour |
 |------|------|-----------|
-| **diagnostic** | `run-diagnostic.sh` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses answers afterwards with full curriculum access. |
+| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses answers afterwards with full curriculum access. |
 | **guided** | `/gm-check-topic` | Conversational revision-style chat with Claude. Hints and feedback allowed. Records progress. |
 | **remediation** | `/gm-work-through` | Teaching mode targeting weak areas. Worked examples, scaffolding, cheat sheets. |
 
@@ -19,10 +19,12 @@ Three modes:
 ## Architecture
 
 ```
+run-diagnostic.sh              # Shell script — presents questions, captures answers, no AI
+                               # Discovers course from topic slug automatically
+
 courses/
   [course-slug]/               # e.g. how-bridges-work
     COURSE.md                  # Course-specific reference (topic map, rubric, confidence schema, etc.)
-    run-diagnostic.sh          # Shell script — presents questions, captures answers, no AI
     curriculum/
       overview.md              # Topic map
       topics/
