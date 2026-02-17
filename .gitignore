@@ -1,0 +1,6 @@
+# Student data — private
+students/*
+!students/example/
+
+# Claude Code local settings
+.claude/settings.local.json

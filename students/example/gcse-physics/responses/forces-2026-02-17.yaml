@@ -1,0 +1,38 @@
+student: example
+topic: forces
+topic_name: Forces
+date: 2026-02-17
+mode: diagnostic
+assessed: true
+
+responses:
+  Q1:
+    question: "What's the difference between mass and weight? Would either of them change if you went to the Moon?"
+    answer: "Mass is the amount of stuff in something and weight is how heavy it is. Weight would change on the Moon because there's less gravity."
+    assessment:
+    notes:
+  Q2:
+    question: "A car is driving at a steady 30mph on a straight road. What's the overall resultant force on the car?"
+    answer: "I think it's 30 because it's going at 30?"
+    assessment:
+    notes:
+  Q3:
+    question: "I push against a wall and it doesn't move. Is the wall pushing back on me?"
+    answer: "Yeah the wall pushes back, that's why I don't go through it."
+    assessment:
+    notes:
+  Q4:
+    question: "When a skydiver jumps out of a plane, they speed up at first but then eventually fall at a constant speed. Why do they stop accelerating?"
+    answer: "Because the air resistance gets bigger and eventually equals the weight so they stop speeding up."
+    assessment:
+    notes:
+  Q5:
+    question: "A 1000kg car accelerates at 2 metres per second squared. Calculate the force needed to produce that acceleration."
+    answer: "[no answer given]"
+    assessment:
+    notes:
+  Q6:
+    question: "Two children are on a seesaw and one is heavier than the other. Without anyone getting off or adding any weight, how could they balance it?"
+    answer: "The heavier one moves closer to the middle."
+    assessment:
+    notes:
