@@ -1,0 +1,51 @@
+student: Example
+subject: How Bridges Work
+last_session: 2026-02-17
+
+topics:
+  forces-and-loads:
+    status: assessed
+    confidence: okay
+    mode: diagnostic
+    notes: "Good intuitive grasp of compression and tension — used the right terms without prompting. Understands equilibrium as balanced forces but lacks technical language. Confuses dead load with 'no load' rather than self-weight. Could not describe a load path through a suspension bridge."
+    last_assessed: 2026-02-17
+    sub_topics:
+      "1.1_compression_and_tension":
+        confidence: strong
+        notes: "Correctly identified compression on top surface and tension on bottom. Used terms 'compressed' and 'pulled apart' naturally."
+      "1.2_equilibrium":
+        confidence: okay
+        notes: "Recognises forces must balance but says 'strong enough' rather than describing equilibrium. No mention of reaction forces at supports."
+      "1.3_dead_and_live_loads":
+        confidence: weak
+        notes: "Thinks dead load means 'nothing on the bridge' — misses that dead load is the bridge's own weight. Gets live load roughly right."
+      "1.4_forces_through_structures":
+        confidence: weak
+        notes: "No answer given — concept of forces travelling through structural elements not yet understood."
+    responses:
+      Q1:
+        question: "When you stand on a wooden plank bridging a gap, the top surface of the plank and the bottom surface are experiencing different forces. What's happening to each surface?"
+        answer: "The top is being squashed down by your weight and the bottom is being stretched because the plank bends. Like the top is getting compressed and the bottom is getting pulled apart."
+        assessment: strong
+        notes: "Excellent — identifies compression on top and tension on bottom without prompting. Uses 'compressed' and 'pulled apart' correctly. Recognises bending as the mechanism."
+      Q2:
+        question: "A footbridge has a lorry parked in the middle of it, but the bridge isn't moving or breaking. What does that tell you about the forces acting on it?"
+        answer: "It means the bridge is strong enough to hold it. The forces must be balanced somehow."
+        assessment: okay
+        notes: "Gets the core idea (balanced forces) but frames it as 'strong enough' rather than equilibrium. No mention of where the balancing force comes from (support reactions)."
+      Q3:
+        question: "Engineers talk about 'dead loads' and 'live loads' on a bridge. What do you think the difference is, and can you give an example of each?"
+        answer: "I'm not sure. Maybe dead load is when nothing is on it and live load is when stuff is crossing it? Like a dead load is an empty bridge and a live load is when cars are driving over."
+        assessment: weak
+        notes: "Confuses dead load with absence of load. The bridge's own weight IS the dead load — it's always there. Gets the live load concept roughly right (traffic) but the dead/live distinction is not understood."
+      Q4:
+        question: "When a car drives across a suspension bridge, the weight doesn't just push straight down through the deck. How does the force actually get from the car down to the ground?"
+        answer: "[no answer given]"
+        assessment: weak
+        notes: "No answer given — load path concept not assessed. May not have encountered the idea of forces travelling through different structural elements."
+  bridge-types:
+    status: not_started
+    confidence: not_covered
+    mode:
+    notes:
+    last_assessed:

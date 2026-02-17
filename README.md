@@ -1,6 +1,6 @@
 # gap-map
 
-A diagnostic tool for tutors. Assesses student understanding across exam courses and produces structured strength/gap maps for lesson planning.
+A diagnostic tool for tutors. Assesses student understanding across courses and produces structured strength/gap maps for lesson planning.
 
 Built for [Claude Code](https://claude.ai/code). Not a course delivery platform — a tutor's measurement instrument.
 
@@ -49,8 +49,8 @@ cd gap-map
 ### Run a diagnostic
 
 ```bash
-cd courses/gcse-physics
-./run-diagnostic.sh forces Freya
+cd courses/how-bridges-work
+./run-diagnostic.sh forces-and-loads Freya
 ```
 
 The script presents questions one at a time, captures answers, then launches Claude to assess them automatically.
@@ -59,18 +59,18 @@ The script presents questions one at a time, captures answers, then launches Cla
 
 ```bash
 # 1. Run the diagnostic (shell script — no AI)
-cd courses/gcse-physics
-SKIP_ASSESS=true ./run-diagnostic.sh forces Freya
+cd courses/how-bridges-work
+SKIP_ASSESS=true ./run-diagnostic.sh forces-and-loads Freya
 
 # 2. Assess the answers (Claude)
 claude
-/ks-assess-answers Freya forces 2026-02-17
+/ks-assess-answers Freya forces-and-loads 2026-02-17
 
 # 3. Check the gap map
 /ks-show-progress Freya
 
 # 4. Teach the weak areas
-/ks-work-through forces Freya "focus on balanced forces and F=ma"
+/ks-work-through forces-and-loads Freya "focus on dead loads and load paths"
 ```
 
 ### View the example
@@ -81,18 +81,18 @@ The `students/example/` directory contains a worked example showing the full dat
 
 ```
 courses/
-  [course-slug]/               # e.g. gcse-physics
+  how-bridges-work/            # Demo course (2 topics, 4 questions each)
     COURSE.md                  # Course reference (topic map, rubric, progress format)
     run-diagnostic.sh          # Shell script — no AI touches this
     curriculum/
-      overview.md              # Full spec map
+      overview.md              # Topic map
       topics/
-        [number]-[slug].md     # Concepts, misconceptions, questions per topic
-  template/                    # Copy this to create a new course
+        1-forces-and-loads.md  # Compression, tension, equilibrium, loads
+        2-bridge-types.md      # Beam, arch, suspension, cable-stayed
 
 students/
-  [name]/                      # One folder per student (lowercase)
-    [course-slug]/
+  example/                     # Worked example showing full data flow
+    how-bridges-work/
       progress.yaml            # The gap map
       responses/               # Raw diagnostic captures
       reports/                 # Generated reports (student, tutor, parent)
@@ -102,9 +102,9 @@ students/
 
 ## Adding a new course
 
-1. Copy `courses/template/` to `courses/your-course-slug/`
+1. Copy `courses/how-bridges-work/` to `courses/your-course-slug/`
 2. Edit `COURSE.md` with your subject details, topic list, and exam structure
-3. Write curriculum topic files following the template in `curriculum/topics/1-example-topic.md`
+3. Write curriculum topic files following the pattern in the existing topics
 4. Update `run-diagnostic.sh` with your topic slugs and file mappings
 5. Run `chmod +x courses/your-course-slug/run-diagnostic.sh`
 
@@ -121,14 +121,6 @@ Student data is gitignored by default — the `students/` directory is excluded 
 If you want to track student progress in version control (useful for seeing development over time), either:
 - Add specific student folders to git tracking: `git add -f students/[name]/`
 - Or keep a separate private repo for student data and symlink the `students/` directory
-
-## Currently included courses
-
-| Course | Exam board | Path |
-|--------|-----------|------|
-| GCSE Physics | AQA 8463 | `courses/gcse-physics/` |
-| GCSE Chemistry | AQA 8462 | `courses/gcse-chemistry/` |
-| GCSE Religious Studies | AQA 8062, Spec A | `courses/gcse-rs/` |
 
 ## Design principles
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-Diagnostic tool for a tutor. Assesses student understanding across GCSE courses and produces structured strength/gap maps for lesson planning. Not a course delivery platform — a tutor's measurement instrument.
+Diagnostic tool for a tutor. Assesses student understanding across courses and produces structured strength/gap maps for lesson planning. Not a course delivery platform — a tutor's measurement instrument.
 
 Three modes:
 
@@ -20,11 +20,11 @@ Three modes:
 
 ```
 courses/
-  [course-slug]/               # e.g. gcse-physics, gcse-rs
+  [course-slug]/               # e.g. how-bridges-work
     COURSE.md                  # Course-specific reference (topic map, rubric, confidence schema, etc.)
     run-diagnostic.sh          # Shell script — presents questions, captures answers, no AI
     curriculum/
-      overview.md              # Full spec map
+      overview.md              # Topic map
       topics/
         [number]-[slug].md     # One file per topic with concepts, misconceptions, questions
 
@@ -58,19 +58,17 @@ Each course lives under `courses/[course-slug]/` with its own `COURSE.md` contai
 
 Student data lives under `students/[name]/[course-slug]/`. Student folder names are always lowercase.
 
-### Currently supported courses
+### Included courses
 
 | Course | Path |
 |--------|------|
-| GCSE Physics (AQA 8463) | `courses/gcse-physics/` |
-| GCSE Chemistry (AQA 8462) | `courses/gcse-chemistry/` |
-| GCSE Religious Studies (AQA 8062, Spec A) | `courses/gcse-rs/` |
+| How Bridges Work (demo, 2 topics) | `courses/how-bridges-work/` |
 
 ## Progress File Format
 
 The confidence schema varies by course — see each course's `COURSE.md` for details.
 
-**Single-confidence courses** (e.g. Physics):
+**Single-confidence courses** (e.g. How Bridges Work):
 ```yaml
 student: Name
 subject: Course name
@@ -89,9 +87,9 @@ topics:
         confidence: strong | okay | weak
         notes: "Assessment summary"
     sub_topics:              # optional — added by /ks-assess-answers
-      "5.1_forces_interactions":
+      "1.1_compression_and_tension":
         confidence: okay
-        notes: "Knows mass vs weight, missing units"
+        notes: "Understands pushing vs pulling but mixes up terms"
     responses:       # diagnostic mode only
       Q1:
         question: "The question asked"
@@ -100,17 +98,7 @@ topics:
         notes: "What the answer reveals"
 ```
 
-**Dual-AO courses** (e.g. RS) — uses `ao1_confidence` and `ao2_confidence` instead of `confidence`:
-```yaml
-topics:
-  topic-slug:
-    status: assessed | partially_assessed | not_started
-    ao1_confidence: strong | okay | weak | not_covered
-    ao2_confidence: strong | okay | weak | not_covered
-    mode: diagnostic | guided | remediation
-    notes: "Specific observations"
-    last_assessed: YYYY-MM-DD
-```
+Courses with dual assessment objectives (e.g. knowledge vs evaluation) can use `ao1_confidence` and `ao2_confidence` instead of `confidence` — see the relevant course's `COURSE.md` for details.
 
 When a student has no progress file, create one with all topics set to `not_started` / `not_covered`.
 

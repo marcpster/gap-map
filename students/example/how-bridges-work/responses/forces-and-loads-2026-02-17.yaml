@@ -1,0 +1,28 @@
+student: example
+topic: forces-and-loads
+topic_name: Forces and Loads
+date: 2026-02-17
+mode: diagnostic
+assessed: true
+
+responses:
+  Q1:
+    question: "When you stand on a wooden plank bridging a gap, the top surface of the plank and the bottom surface are experiencing different forces. What's happening to each surface?"
+    answer: "The top is being squashed down by your weight and the bottom is being stretched because the plank bends. Like the top is getting compressed and the bottom is getting pulled apart."
+    assessment:
+    notes:
+  Q2:
+    question: "A footbridge has a lorry parked in the middle of it, but the bridge isn't moving or breaking. What does that tell you about the forces acting on it?"
+    answer: "It means the bridge is strong enough to hold it. The forces must be balanced somehow."
+    assessment:
+    notes:
+  Q3:
+    question: "Engineers talk about 'dead loads' and 'live loads' on a bridge. What do you think the difference is, and can you give an example of each?"
+    answer: "I'm not sure. Maybe dead load is when nothing is on it and live load is when stuff is crossing it? Like a dead load is an empty bridge and a live load is when cars are driving over."
+    assessment:
+    notes:
+  Q4:
+    question: "When a car drives across a suspension bridge, the weight doesn't just push straight down through the deck. How does the force actually get from the car down to the ground?"
+    answer: "[no answer given]"
+    assessment:
+    notes:
