@@ -1,3 +1,7 @@
+# Courses — only the demo course is tracked (avoids commit of exam board material)
+courses/*
+!courses/how-bridges-work/
+
 # Student data — private
 students/*
 !students/example/
