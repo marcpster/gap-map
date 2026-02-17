@@ -6,14 +6,14 @@ A diagnostic tool for learning. Assesses understanding across courses and produc
 
 ## The solution
 
-| Mode | Tool | What happens |
-|------|------|-------------|
-| **1. Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions and captures raw answers. |
-| **2. Assessment** | `/gm-assess-answers` | Claude then grades the answers and generates reports. |
-| **3a. Guided revision** | `/gm-revise` | A proper chat with hints and feedback — teaching, not testing. |
-| **3b. Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
+| Step | Mode | Tool | What happens |
+|------|------|------|-------------|
+| 1 | **Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions and captures raw answers. |
+| 2 | **Assessment** | `/gm-assess` | Claude then grades the answers and generates reports. |
+| 3a | **Guided revision** | `/gm-revise` | A proper chat with hints and feedback — teaching, not testing. |
+| 3b | **Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
 
-The three-mode loop — **diagnose → assess → teach** — is the core of the system. Each mode feeds the next.
+> The three-mode loop — **diagnose → assess → teach** — is the core of the system. Each mode feeds the next.
 
 ## What you get
 
@@ -56,7 +56,7 @@ SKIP_ASSESS=true ./run-diagnostic.sh forces-and-loads Freya
 
 # 2. Assess the answers (Claude)
 claude
-/gm-assess-answers Freya forces-and-loads 2026-02-17
+/gm-assess Freya forces-and-loads 2026-02-17
 
 # 3. Check the gap map
 /gm-show-progress Freya
@@ -113,7 +113,7 @@ Each topic file has four sections:
 |---------|-------------|
 | **Key Concepts** | The actual content — what the student should know, broken into numbered sub-topics |
 | **Common Misconceptions** | What students typically get wrong (this is where the real assessment value is) |
-| **Diagnostic Script** | Open-ended questions with "Looking for" criteria — the answer key for `/gm-assess-answers` |
+| **Diagnostic Script** | Open-ended questions with "Looking for" criteria — the answer key for `/gm-assess` |
 | **Guided Mode probes** | Conversational starters for `/gm-revise` revision sessions |
 
 See `courses/how-bridges-work/` for a complete working example.

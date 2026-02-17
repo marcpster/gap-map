@@ -10,7 +10,7 @@ Two topics covering the fundamentals of bridge engineering: how forces travel th
 
 | Mode | Tool | Behaviour |
 |------|------|-----------|
-| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses afterwards. |
+| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess` | Shell script presents questions (no AI). Claude assesses afterwards. |
 | **guided** | `/gm-revise` | Conversational revision-style chat. Hints and nudges allowed. |
 | **remediation** | `/gm-work-through` | Teaching mode targeting weak areas. Worked examples, scaffolding, cheat sheets. |
 
@@ -66,7 +66,7 @@ topics:
         mode: diagnostic | guided | remediation
         confidence: strong | okay | weak
         notes: "Assessment summary"
-    sub_topics:                 # Optional — added by /gm-assess-answers from Sub-topic Coverage tables
+    sub_topics:                 # Optional — added by /gm-assess from Sub-topic Coverage tables
       "1.1_compression_and_tension":
         confidence: okay
         notes: "Understands pushing vs pulling but mixes up terms"

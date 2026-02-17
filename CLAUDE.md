@@ -10,7 +10,7 @@ Three modes:
 
 | Mode | Tool | Behaviour |
 |------|------|-----------|
-| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess-answers` | Shell script presents questions (no AI). Claude assesses answers afterwards with full curriculum access. |
+| **diagnostic** | `./run-diagnostic.sh [topic] [student]` → `/gm-assess` | Shell script presents questions (no AI). Claude assesses answers afterwards with full curriculum access. |
 | **guided** | `/gm-revise` | Conversational revision-style chat with Claude. Hints and feedback allowed. Records progress. |
 | **remediation** | `/gm-work-through` | Teaching mode targeting weak areas. Worked examples, scaffolding, cheat sheets. |
 
@@ -43,14 +43,14 @@ students/
 
 .claude/skills/
   gm-diagnostic/SKILL.md      # Launch diagnostic session (outputs terminal command)
-  gm-assess-answers/SKILL.md  # Post-diagnostic assessment skill
+  gm-assess/SKILL.md  # Post-diagnostic assessment skill
   gm-revise/SKILL.md     # Guided revision conversation skill
   gm-show-progress/SKILL.md   # Read-only progress display skill
   gm-work-through/SKILL.md    # Remediation teaching skill
 ```
 
 **Data flow:**
-- **Diagnostic:** `run-diagnostic.sh` reads questions from curriculum → captures raw answers to `students/[name]/[course]/responses/` → tutor runs `/gm-assess-answers` → Claude grades against curriculum, writes to `progress.yaml`, generates reports
+- **Diagnostic:** `run-diagnostic.sh` reads questions from curriculum → captures raw answers to `students/[name]/[course]/responses/` → tutor runs `/gm-assess` → Claude grades against curriculum, writes to `progress.yaml`, generates reports
 - **Guided:** `/gm-revise` reads curriculum + progress → runs conversation → writes assessment to progress
 - **Remediation:** `/gm-work-through` reads progress → teaches weak areas → writes cheat sheet + session summary + updates progress
 - Curriculum files are read-only reference material. Git history captures student progression over time.
@@ -89,7 +89,7 @@ topics:
         mode: diagnostic | guided | remediation
         confidence: strong | okay | weak
         notes: "Assessment summary"
-    sub_topics:              # optional — added by /gm-assess-answers
+    sub_topics:              # optional — added by /gm-assess
       "1.1_compression_and_tension":
         confidence: okay
         notes: "Understands pushing vs pulling but mixes up terms"
@@ -110,7 +110,7 @@ When a student has no progress file, create one with all topics set to `not_star
 | Command | Usage | Purpose |
 |---------|-------|---------|
 | `/gm-diagnostic` | `/gm-diagnostic [topic] [student]` | Discover courses/topics, output the terminal command to run a diagnostic. |
-| `/gm-assess-answers` | `/gm-assess-answers [student] [topic] [date]` | Grade raw diagnostic answers against curriculum. Generates three-audience reports. |
+| `/gm-assess` | `/gm-assess [student] [topic] [date]` | Grade raw diagnostic answers against curriculum. Generates three-audience reports. |
 | `/gm-revise` | `/gm-revise [topic] [student]` | Guided revision conversation. Hints and nudges allowed. |
 | `/gm-work-through` | `/gm-work-through [topic] [student] ["optional focus"]` | Remediation teaching targeting weak areas. Produces cheat sheet. |
 | `/gm-show-progress` | `/gm-show-progress [student]` | Display strength/gap map. |

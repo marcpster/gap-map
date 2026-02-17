@@ -9,7 +9,7 @@ Run a conversational revision session to assess a student's understanding of a s
 
 > **For scripted diagnostics** (no hints, no feedback), use the shell script instead:
 > `./run-diagnostic.sh [topic] [student-name]`
-> Then assess with `/gm-assess-answers [student] [topic] [date]`
+> Then assess with `/gm-assess [student] [topic] [date]`
 
 ## Usage
 
@@ -83,7 +83,7 @@ Use the rubric from COURSE.md:
 
 Update the student's progress file (`students/[student]/[course-slug]/progress.yaml`).
 
-**If the topic has an existing assessment**, move the current values to the `history` array before overwriting (same pattern as `/gm-assess-answers`).
+**If the topic has an existing assessment**, move the current values to the `history` array before overwriting (same pattern as `/gm-assess`).
 
 **Use the progress file format defined in COURSE.md** — this determines which confidence fields to use:
 

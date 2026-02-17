@@ -72,7 +72,7 @@ Paste into your terminal to start.
 
 The script will present questions one at a time (no AI), capture answers, then launch Claude to assess automatically.
 
-To assess manually later, add `SKIP_ASSESS=true` before the command, then run `/gm-assess-answers [student] [topic]` when ready.
+To assess manually later, add `SKIP_ASSESS=true` before the command, then run `/gm-assess [student] [topic]` when ready.
 ```
 
 ## Important Rules

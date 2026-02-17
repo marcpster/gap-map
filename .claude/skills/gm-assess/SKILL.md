@@ -1,6 +1,6 @@
 ---
-name: gm-assess-answers
-description: Assess student answers captured by the diagnostic shell script. Reads raw answers and the full curriculum, grades each response, and writes results to the student's progress file. Infers course from topic slug. Usage: /gm-assess-answers [student-name] [topic-slug] [date]
+name: gm-assess
+description: Assess student answers captured by the diagnostic shell script. Reads raw answers and the full curriculum, grades each response, and writes results to the student's progress file. Infers course from topic slug. Usage: /gm-assess [student-name] [topic-slug] [date]
 ---
 
 # Assess Answers — Post-Diagnostic Assessment Skill
@@ -10,22 +10,22 @@ Assess a student's raw answers (captured by `run-diagnostic.sh`) against the cur
 ## Usage
 
 ```
-/gm-assess-answers [student-name] [topic-slug] [date] ["optional tutor comment"]
+/gm-assess [student-name] [topic-slug] [date] ["optional tutor comment"]
 ```
 
 **Examples:**
-- `/gm-assess-answers` (lists all unassessed responses across all students and courses)
-- `/gm-assess-answers Freya` (lists unassessed responses for Freya)
-- `/gm-assess-answers Freya forces 2026-02-02`
-- `/gm-assess-answers Freya christianity-beliefs 2026-02-09`
-- `/gm-assess-answers Freya energy` (uses most recent file if date omitted)
-- `/gm-assess-answers Freya forces 2026-02-08 "seemed hesitant on calculations"`
+- `/gm-assess` (lists all unassessed responses across all students and courses)
+- `/gm-assess Freya` (lists unassessed responses for Freya)
+- `/gm-assess Freya forces 2026-02-02`
+- `/gm-assess Freya christianity-beliefs 2026-02-09`
+- `/gm-assess Freya energy` (uses most recent file if date omitted)
+- `/gm-assess Freya forces 2026-02-08 "seemed hesitant on calculations"`
 
 ## Workflow
 
 ### Step 0: Resolve Parameters and Course
 
-**If no topic is provided** (just `/gm-assess-answers` or `/gm-assess-answers [student]`):
+**If no topic is provided** (just `/gm-assess` or `/gm-assess [student]`):
 
 1. Glob for response YAML files across all courses:
    - No student: `students/*/*/responses/*.yaml`
@@ -41,7 +41,7 @@ Assess a student's raw answers (captured by `run-diagnostic.sh`) against the cur
 | Freya | forces | gcse-physics | 2026-02-08 | students/freya/gcse-physics/responses/forces-2026-02-08.yaml |
 | Marc | christianity-beliefs | gcse-rs | 2026-02-09 | students/marc/gcse-rs/responses/christianity-beliefs-2026-02-09.yaml |
 
-Run: `/gm-assess-answers [student] [topic] [date]` to assess one.
+Run: `/gm-assess [student] [topic] [date]` to assess one.
 ```
 
 If no unassessed responses exist, say so: "All responses have been assessed. Nothing to do."

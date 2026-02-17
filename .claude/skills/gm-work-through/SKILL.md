@@ -7,7 +7,7 @@ description: Remediation teaching skill targeting weak areas from assessment. Wo
 
 Teach weak areas identified by prior assessment. This is **remediation mode** — explaining, scaffolding, worked examples, and patience. Distinct from `/gm-revise` (which assesses) — this skill teaches.
 
-> **For assessment** use `/gm-revise` (guided) or `run-diagnostic.sh` → `/gm-assess-answers` (scripted).
+> **For assessment** use `/gm-revise` (guided) or `run-diagnostic.sh` → `/gm-assess` (scripted).
 > Use `/gm-work-through` when you already know the gaps and want to fill them.
 
 ## Usage
@@ -176,7 +176,7 @@ Write to `students/[student]/[course-slug]/reports/[topic]-[date]-session.md`.
 
 Update `students/[student]/[course-slug]/progress.yaml`.
 
-**Move current assessment to history** (same pattern as `/gm-assess-answers`), then write new values using the progress file format from COURSE.md:
+**Move current assessment to history** (same pattern as `/gm-assess`), then write new values using the progress file format from COURSE.md:
 
 ```yaml
   [topic-slug]:
