@@ -1,6 +1,6 @@
 # gap-map
 
-A diagnostic tool for learning. Assesses understanding across "courses" and produces structured strength/gap maps for further learning, lesson plans, etc.
+A diagnostic tool for learning. Assesses understanding across courses and produces structured strength/gap maps for further learning, lesson plans, etc.
 
 Run with [Claude Code](https://claude.ai/code), specific Claude skills.
 
@@ -97,17 +97,42 @@ students/
 .claude/skills/                # Claude Code skills that power the AI modes
 ```
 
+## Course structure
+
+A course is just a folder of markdown files:
+
+```
+courses/your-course-slug/
+  COURSE.md                        # Course reference: topic list, rubric, progress format
+  curriculum/
+    overview.md                    # Topic map (what's in the course)
+    topics/
+      1-first-topic.md             # One file per topic
+      2-second-topic.md
+```
+
+Each topic file has four sections:
+
+| Section | What it does |
+|---------|-------------|
+| **Key Concepts** | The actual content — what the student should know, broken into numbered sub-topics |
+| **Common Misconceptions** | What students typically get wrong (this is where the real assessment value is) |
+| **Diagnostic Script** | Open-ended questions with "Looking for" criteria — the answer key for `/gm-assess-answers` |
+| **Guided Mode probes** | Conversational starters for `/gm-check-topic` revision sessions |
+
+See `courses/how-bridges-work/` for a complete working example.
+
 ## Adding a new course
 
-1. Copy `courses/how-bridges-work/` to `courses/your-course-slug/`
-2. Edit `COURSE.md` with your subject details, topic list, and exam structure
-3. Write curriculum topic files following the pattern in the existing topics
+The easiest way: point Claude at the exam board spec (or any syllabus/textbook) and ask it to generate the course files following the pattern in `courses/how-bridges-work/`. It will create the `COURSE.md`, topic files, and misconception lists from the source material.
 
-Each topic file needs:
-- **Key Concepts** — what the spec covers
-- **Common Misconceptions** — what students typically get wrong (this is where the real value is)
-- **Diagnostic Script** — open-ended questions with "Looking for" criteria
-- **Guided Mode probes** — conversational starters for revision sessions
+Manually:
+
+1. Copy `courses/how-bridges-work/` to `courses/your-course-slug/`
+2. Edit `COURSE.md` with your subject details, topic list, and confidence schema
+3. Write topic files following the same four-section pattern
+
+The diagnostic script (`run-diagnostic.sh`) discovers courses automatically — no config needed.
 
 ## Student data
 
