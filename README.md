@@ -1,10 +1,8 @@
 # gap-map
 
-A diagnostic tool for learning. Assesses understanding across courses and produces structured strength/gap maps for further learning, lesson plans, etc.
+A diagnostic tool for learning. Assesses understanding across courses and produces structured strength/gap maps for further learning, lesson plans, etc. Run with [Claude Code](https://claude.ai/code), specific Claude skills.
 
-Run with [Claude Code](https://claude.ai/code), specific Claude skills.
-
-When you are in the talking over the topics stage (after the diagnostic), type something short (anything!) in the prompt, so you can't see the helpful suggestions.
+> **Tip:** When you are running the skills (after the diagnostic), as soon as you can type something short on the keyboard. If you don't Claude will auto-suggest a great answer in the prompt, which is not useful for learning!
 
 ## The solution
 
@@ -12,9 +10,9 @@ Split the work architecturally:
 
 | Mode | Tool | What happens |
 |------|------|-------------|
-| **Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions aloud. No AI anywhere near the student. Captures raw answers to YAML. |
-| **Assessment** | `/gm-assess-answers` | Claude grades the answers *afterwards*, with full access to the curriculum, marking criteria, and misconception lists. Generates three reports (student, tutor, parent). |
-| **Guided revision** | `/gm-check-topic` | Conversational chat where hints and feedback are fine — this is teaching, not testing. |
+| **Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions and captures raw answers. |
+| **Assessment** | `/gm-assess-answers` | Claude then grades the answers and generates reports. |
+| **Guided revision** | `/gm-check-topic` | A proper chat with hints and feedback — teaching, not testing. |
 | **Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
 
 The three-mode loop — **diagnose → assess → teach** — is the core of the system. Each mode feeds the next.
