@@ -3,6 +3,8 @@ courses/*
 !courses/how-bridges-work/
 
 # Student data — private
+# Symlink real student dirs from elsewhere, e.g.:
+#   ln -s /path/to/tutor-data/students/Freda/gap-map-course-assesment students/freda
 students/*
 !students/example/
 
