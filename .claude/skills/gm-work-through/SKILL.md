@@ -1,34 +1,34 @@
 ---
-name: ks-work-through
-description: Remediation teaching skill targeting weak areas from assessment. Works through gaps with the student using explanations, worked examples, and scaffolding. Produces cheat sheet and session summary. Infers course from topic slug. Usage: /ks-work-through [topic] [student] ["optional focus"]
+name: gm-work-through
+description: Remediation teaching skill targeting weak areas from assessment. Works through gaps with the student using explanations, worked examples, and scaffolding. Produces cheat sheet and session summary. Infers course from topic slug. Usage: /gm-work-through [topic] [student] ["optional focus"]
 ---
 
 # Work Through — Remediation Teaching Skill
 
-Teach weak areas identified by prior assessment. This is **remediation mode** — explaining, scaffolding, worked examples, and patience. Distinct from `/ks-check-topic` (which assesses) — this skill teaches.
+Teach weak areas identified by prior assessment. This is **remediation mode** — explaining, scaffolding, worked examples, and patience. Distinct from `/gm-check-topic` (which assesses) — this skill teaches.
 
-> **For assessment** use `/ks-check-topic` (guided) or `run-diagnostic.sh` → `/ks-assess-answers` (scripted).
-> Use `/ks-work-through` when you already know the gaps and want to fill them.
+> **For assessment** use `/gm-check-topic` (guided) or `run-diagnostic.sh` → `/gm-assess-answers` (scripted).
+> Use `/gm-work-through` when you already know the gaps and want to fill them.
 
 ## Usage
 
 ```
-/ks-work-through [topic] [student] ["optional focus"]
+/gm-work-through [topic] [student] ["optional focus"]
 ```
 
 **Examples:**
-- `/ks-work-through forces Freya`
-- `/ks-work-through forces Freya "focus on moments and F=ma"`
-- `/ks-work-through forces Freya moments` (sub-topic focus — targets 5.4 Moments specifically)
-- `/ks-work-through christianity-beliefs Marc "atonement and the crucifixion"`
+- `/gm-work-through forces Freya`
+- `/gm-work-through forces Freya "focus on moments and F=ma"`
+- `/gm-work-through forces Freya moments` (sub-topic focus — targets 5.4 Moments specifically)
+- `/gm-work-through christianity-beliefs Marc "atonement and the crucifixion"`
 
 The optional focus can be a free-text description or a sub-topic name from the progress file's `sub_topics` section. If a sub-topic key is given (e.g. `moments`, `motion`, `trinity`), prioritise that sub-topic's weak areas.
 
 **Topic slugs:** See the Topic Slug → File Mapping table in the relevant `COURSE.md`.
 
-## How This Differs from /ks-check-topic
+## How This Differs from /gm-check-topic
 
-| | `/ks-check-topic` | `/ks-work-through` |
+| | `/gm-check-topic` | `/gm-work-through` |
 |-|----------------|-----------------|
 | **Purpose** | Assess understanding | Teach weak areas |
 | **Style** | Testing (noting prompted vs unprompted) | Teaching (explaining, scaffolding, worked examples) |
@@ -176,7 +176,7 @@ Write to `students/[student]/[course-slug]/reports/[topic]-[date]-session.md`.
 
 Update `students/[student]/[course-slug]/progress.yaml`.
 
-**Move current assessment to history** (same pattern as `/ks-assess-answers`), then write new values using the progress file format from COURSE.md:
+**Move current assessment to history** (same pattern as `/gm-assess-answers`), then write new values using the progress file format from COURSE.md:
 
 ```yaml
   [topic-slug]:

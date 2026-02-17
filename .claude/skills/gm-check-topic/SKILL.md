@@ -1,6 +1,6 @@
 ---
-name: ks-check-topic
-description: Run a guided revision conversation to assess a student's understanding of a specific topic. Infers course from topic slug. Conversational style with hints and nudges allowed. Usage: /ks-check-topic [topic] [student-name]. Example: /ks-check-topic forces Jamie
+name: gm-check-topic
+description: Run a guided revision conversation to assess a student's understanding of a specific topic. Infers course from topic slug. Conversational style with hints and nudges allowed. Usage: /gm-check-topic [topic] [student-name]. Example: /gm-check-topic forces Jamie
 ---
 
 # Check Topic — Guided Revision Conversation
@@ -9,17 +9,17 @@ Run a conversational revision session to assess a student's understanding of a s
 
 > **For scripted diagnostics** (no hints, no feedback), use the shell script instead:
 > `cd courses/[course-slug] && ./run-diagnostic.sh [topic] [student-name]`
-> Then assess with `/ks-assess-answers [student] [topic] [date]`
+> Then assess with `/gm-assess-answers [student] [topic] [date]`
 
 ## Usage
 
 ```
-/ks-check-topic [topic] [student-name]
+/gm-check-topic [topic] [student-name]
 ```
 
 **Examples:**
-- `/ks-check-topic forces Jamie`
-- `/ks-check-topic christianity-beliefs Freya`
+- `/gm-check-topic forces Jamie`
+- `/gm-check-topic christianity-beliefs Freya`
 
 **Topic slugs:** See the Topic Slug → File Mapping table in the relevant `COURSE.md`.
 
@@ -83,7 +83,7 @@ Use the rubric from COURSE.md:
 
 Update the student's progress file (`students/[student]/[course-slug]/progress.yaml`).
 
-**If the topic has an existing assessment**, move the current values to the `history` array before overwriting (same pattern as `/ks-assess-answers`).
+**If the topic has an existing assessment**, move the current values to the `history` array before overwriting (same pattern as `/gm-assess-answers`).
 
 **Use the progress file format defined in COURSE.md** — this determines which confidence fields to use:
 

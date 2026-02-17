@@ -1,6 +1,6 @@
 ---
-name: ks-show-progress
-description: Display the current strength/gap map for a student. Shows all courses with progress data, or a specific course if specified. Usage: /ks-show-progress [student-name] [course-slug]. Example: /ks-show-progress Jamie
+name: gm-show-progress
+description: Display the current strength/gap map for a student. Shows all courses with progress data, or a specific course if specified. Usage: /gm-show-progress [student-name] [course-slug]. Example: /gm-show-progress Jamie
 ---
 
 # Show Progress — Strength/Gap Map Skill
@@ -10,13 +10,13 @@ Display a clear overview of a student's assessed understanding across their cour
 ## Usage
 
 ```
-/ks-show-progress [student-name] [course-slug]
+/gm-show-progress [student-name] [course-slug]
 ```
 
 **Examples:**
-- `/ks-show-progress Jamie` (shows all courses with progress data)
-- `/ks-show-progress Jamie gcse-physics` (shows only Physics progress)
-- `/ks-show-progress` (if only one student exists, use that)
+- `/gm-show-progress Jamie` (shows all courses with progress data)
+- `/gm-show-progress Jamie gcse-physics` (shows only Physics progress)
+- `/gm-show-progress` (if only one student exists, use that)
 
 ## Workflow
 

@@ -1,12 +1,10 @@
 # gap-map
 
-A diagnostic tool for tutors. Assesses student understanding across courses and produces structured strength/gap maps for lesson planning.
+A diagnostic tool for learning. Assesses understanding across "courses" and produces structured strength/gap maps for further learning, lesson plans, etc.
 
-Built for [Claude Code](https://claude.ai/code). Not a course delivery platform — a tutor's measurement instrument.
+Run with [Claude Code](https://claude.ai/code), specific Claude skills.
 
-## The problem
-
-AI is too helpful to run a diagnostic. Even with explicit instructions not to give hints, Claude's helpfulness training leaks through — during a live session, the tutor had to physically block the screen to stop the student seeing Claude's encouraging nudges. You can't solve a training-level problem with a prompt-level fix.
+When you are in the talking over the topics stage (after the diagnostic), type something short (anything!) in the prompt, so you can't see the helpful suggestions.
 
 ## The solution
 
@@ -15,9 +13,9 @@ Split the work architecturally:
 | Mode | Tool | What happens |
 |------|------|-------------|
 | **Diagnostic** | `run-diagnostic.sh` | A plain shell script reads questions aloud. No AI anywhere near the student. Captures raw answers to YAML. |
-| **Assessment** | `/ks-assess-answers` | Claude grades the answers *afterwards*, with full access to the curriculum, marking criteria, and misconception lists. Generates three reports (student, tutor, parent). |
-| **Guided revision** | `/ks-check-topic` | Conversational chat where hints and feedback are fine — this is teaching, not testing. |
-| **Remediation** | `/ks-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
+| **Assessment** | `/gm-assess-answers` | Claude grades the answers *afterwards*, with full access to the curriculum, marking criteria, and misconception lists. Generates three reports (student, tutor, parent). |
+| **Guided revision** | `/gm-check-topic` | Conversational chat where hints and feedback are fine — this is teaching, not testing. |
+| **Remediation** | `/gm-work-through` | Teaching mode targeting specific weak areas. Worked examples, scaffolding, cheat sheets. |
 
 The three-mode loop — **diagnose → assess → teach** — is the core of the system. Each mode feeds the next.
 
@@ -64,13 +62,13 @@ SKIP_ASSESS=true ./run-diagnostic.sh forces-and-loads Freya
 
 # 2. Assess the answers (Claude)
 claude
-/ks-assess-answers Freya forces-and-loads 2026-02-17
+/gm-assess-answers Freya forces-and-loads 2026-02-17
 
 # 3. Check the gap map
-/ks-show-progress Freya
+/gm-show-progress Freya
 
 # 4. Teach the weak areas
-/ks-work-through forces-and-loads Freya "focus on dead loads and load paths"
+/gm-work-through forces-and-loads Freya "focus on dead loads and load paths"
 ```
 
 ### View the example

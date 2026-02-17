@@ -176,11 +176,11 @@ echo ""
 if [ "${SKIP_ASSESS:-}" = "true" ]; then
     echo "  To assess these answers, run:"
     echo "    claude"
-    echo "    /ks-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
+    echo "    /gm-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
     echo ""
 else
     echo "  Launching Claude to assess answers..."
     echo ""
     CLAUDE_CMD="${CLAUDE_CMD:-$(command -v claude 2>/dev/null || echo "$HOME/.claude/local/claude")}"
-    cd "$PROTO_DIR" && "$CLAUDE_CMD" "/ks-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
+    cd "$PROTO_DIR" && "$CLAUDE_CMD" "/gm-assess-answers ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
 fi
