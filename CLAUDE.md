@@ -47,6 +47,7 @@ students/
   gm-revise/SKILL.md     # Guided revision conversation skill
   gm-show-progress/SKILL.md   # Read-only progress display skill
   gm-work-through/SKILL.md    # Remediation teaching skill
+  gm-cheatsheet/SKILL.md      # Standalone cheat sheet generation skill
 ```
 
 **Data flow:**
@@ -113,6 +114,7 @@ When a student has no progress file, create one with all topics set to `not_star
 | `/gm-assess` | `/gm-assess [student] [topic] [date]` | Grade raw diagnostic answers against curriculum. Generates three-audience reports. |
 | `/gm-revise` | `/gm-revise [topic] [student]` | Guided revision conversation. Hints and nudges allowed. |
 | `/gm-work-through` | `/gm-work-through [topic] [student] ["optional focus"]` | Remediation teaching targeting weak areas. Produces cheat sheet. |
+| `/gm-cheatsheet` | `/gm-cheatsheet [student] [topic] [date]` | Generate a standalone cheat sheet from progress data. |
 | `/gm-show-progress` | `/gm-show-progress [student]` | Display strength/gap map. |
 
 ## Design Insights (from live sessions)

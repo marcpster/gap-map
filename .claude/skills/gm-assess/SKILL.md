@@ -27,9 +27,9 @@ Assess a student's raw answers (captured by `run-diagnostic.sh`) against the cur
 
 **If no topic is provided** (just `/gm-assess` or `/gm-assess [student]`):
 
-1. Glob for response YAML files across all courses:
-   - No student: `students/*/*/responses/*.yaml`
-   - Student given: `students/[student]/*/responses/*.yaml`
+1. Find response YAML files across all courses. Use `ls` to discover student and course directories (don't use Glob for `students/` paths — student folders may be symlinks which Glob doesn't follow), then read `responses/*.yaml` from each:
+   - No student: list `students/`, then each student's course dirs, then their response files
+   - Student given: list `students/[student]/*/responses/*.yaml` via `ls`
 2. Read each file and check `assessed: false`
 3. Display a summary:
 

@@ -24,7 +24,7 @@ Display a clear overview of a student's assessed understanding across their cour
 
 Lowercase the student name for folder paths (e.g. "Jamie" → `students/jamie/`).
 
-1. Glob `students/[student]/*/progress.yaml` to find all courses this student has progress data for
+1. List course directories with `ls students/[student]/` to find all courses (don't use Glob for `students/` paths — student folders may be symlinks which Glob doesn't follow). Read `progress.yaml` from each course directory found.
 2. If a specific course slug was provided as a second argument, filter to just that course
 3. For each course found, read `courses/[course-slug]/COURSE.md` for the exam structure, topic grouping, confidence schema, and topic slug → file mapping
 4. If no student name provided, check `students/` for available folders and list them
