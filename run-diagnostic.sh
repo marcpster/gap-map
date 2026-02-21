@@ -123,7 +123,8 @@ if [ "$WORKSHEET" = true ]; then
         echo "# ${COURSE_NAME} — ${TOPIC_NAME}"
         echo ""
         echo "**Student:** ${STUDENT_NAME}  "
-        echo "**Date:** ${DATE}"
+        echo "**Date:** ${DATE}  "
+        echo "**Ref:** ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
         echo ""
         echo "---"
         for i in "${!QUESTIONS[@]}"; do
