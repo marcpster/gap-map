@@ -5,14 +5,24 @@
 # No AI involved — just a clean question-and-answer capture.
 #
 # Usage: ./run-diagnostic.sh [topic-slug] [student-name]
+#        ./run-diagnostic.sh --worksheet [topic-slug] [student-name]
 # Example: ./run-diagnostic.sh forces-and-loads Freya
+#          ./run-diagnostic.sh --worksheet forces-and-loads Freya
 #
 # Discovers the course automatically from the topic slug.
+# --worksheet generates a blank YAML response file for offline/handwritten answers.
 
 set -e
 
 # --- Resolve paths relative to script location ---
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# --- Parse --worksheet flag ---
+WORKSHEET=false
+if [ "${1}" = "--worksheet" ]; then
+    WORKSHEET=true
+    shift
+fi
 
 TOPIC_SLUG="${1}"
 STUDENT_NAME="${2}"
@@ -25,6 +35,7 @@ if [ -z "$TOPIC_SLUG" ] || [ -z "$STUDENT_NAME" ]; then
     echo "  ─────────────────────────────────────"
     echo ""
     echo "  Usage: ./run-diagnostic.sh [topic-slug] [student-name]"
+    echo "         ./run-diagnostic.sh --worksheet [topic-slug] [student-name]"
     echo ""
 
     # Discover all topics across all courses
@@ -102,7 +113,46 @@ mkdir -p "$RESPONSE_DIR"
 
 OUTPUT_FILE="${RESPONSE_DIR}/${TOPIC_SLUG}-${DATE}.yaml"
 
-# --- Session ---
+# --- Worksheet mode: generate markdown worksheet and exit ---
+if [ "$WORKSHEET" = true ]; then
+    WORKSHEET_DIR="${SCRIPT_DIR}/students/${STUDENT_LOWER}/${COURSE_SLUG}/worksheets"
+    mkdir -p "$WORKSHEET_DIR"
+    WORKSHEET_FILE="${WORKSHEET_DIR}/${TOPIC_SLUG}-${DATE}.md"
+
+    {
+        echo "# ${COURSE_NAME} — ${TOPIC_NAME}"
+        echo ""
+        echo "**Student:** ${STUDENT_NAME}  "
+        echo "**Date:** ${DATE}"
+        echo ""
+        echo "---"
+        for i in "${!QUESTIONS[@]}"; do
+            Q_NUM=$((i + 1))
+            QUESTION="${QUESTIONS[$i]}"
+            echo ""
+            echo "## Question ${Q_NUM}"
+            echo ""
+            echo "${QUESTION}"
+            echo ""
+            echo "**Answer:**"
+            echo ""
+            echo ""
+            echo ""
+            echo "---"
+        done
+    } > "$WORKSHEET_FILE"
+
+    echo ""
+    echo "  Worksheet saved to: ${WORKSHEET_FILE}"
+    echo ""
+    echo "  Once answered, run:"
+    echo "    claude"
+    echo "    /gm-assess ${STUDENT_NAME} ${TOPIC_SLUG} ${DATE}"
+    echo ""
+    exit 0
+fi
+
+# --- Interactive session ---
 clear
 echo ""
 echo "  ┌─────────────────────────────────────────┐"
